@@ -149,10 +149,10 @@ class LoginPage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          ExtendedImage.asset(
-                            "assets/images/login.png",
-                            width: 200,
-                          ),
+                          // ExtendedImage.asset(
+                          //   "assets/images/login.png",
+                          //   width: 200,
+                          // ),
                           sizedBoxH12,
                           _buildUserNameField(),
                           sizedBoxH16,
