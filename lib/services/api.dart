@@ -87,4 +87,7 @@ class Api {
 
   /// 目录页
   static const String queryIndexList = '/book/queryIndexList';
+
+  /// 首页书籍setting
+  static const String queryListBookSetting = '/book/listBookSetting';
 }

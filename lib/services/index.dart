@@ -14,4 +14,12 @@ class Http {
   static register(data) {
     return HttpUtil.post(Api.register, data: data);
   }
+
+  static queryBookCategory() {
+    return HttpUtil.get(Api.queryBookCategory);
+  }
+
+  static queryListBookSetting() {
+    return HttpUtil.get(Api.queryListBookSetting);
+  }
 }
