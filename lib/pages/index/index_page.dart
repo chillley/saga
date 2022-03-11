@@ -19,7 +19,12 @@ class IndexPage extends StatelessWidget {
     return PageView(
       physics: const NeverScrollableScrollPhysics(),
       controller: controller.pageController,
-      children: [BookMallPage(), const BookRackPage(), const ClassifyPage(), const UserPage()],
+      children: [
+        BookMallPage(),
+        const BookRackPage(),
+        const ClassifyPage(),
+        const UserPage()
+      ],
     );
   }
 

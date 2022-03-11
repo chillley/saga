@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
+import 'dart:ui';
 
 /// @description 常量类
 /// @date 2022/2/18 14:43
@@ -26,6 +27,15 @@ class Constant {
   static bool get isFuchsia => !isWeb && Platform.isFuchsia;
 
   static bool get isIOS => !isWeb && Platform.isIOS;
+
+  static final MediaQueryData mediaQueryData =
+      MediaQueryData.fromWindow(window);
+
+  static final Size screenSize = mediaQueryData.size;
+
+  static final double screenWidth = screenSize.width;
+
+  static final double screenHeight = screenSize.height;
 
   static late AndroidDeviceInfo _androidInfo;
 

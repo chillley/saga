@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:saga/constant/constant.dart';
 import 'package:saga/model/category_entity.dart';
+import 'package:saga/model/setting_book_entity.dart';
 import 'package:saga/services/index.dart';
 
 import 'book_mall_state.dart';
@@ -10,40 +11,38 @@ class BookMallController extends GetxController
     with GetTickerProviderStateMixin {
   final BookMallState state = BookMallState();
   late TabController tabController =
-      TabController(initialIndex: 0, length: 0, vsync: this);
+      TabController(initialIndex: 0, length: 1, vsync: this);
 
   queryBookCategory() async {
     Map<String, dynamic> res = await Http.queryBookCategory();
     if (res['msg'] == Constant.requestSuccess) {
       List data = res['data'];
-      Map<String, dynamic> selectionOfRecommended = {
-        "id": "-1",
-        "name": "精选推荐",
-        "workDirection": null,
-        "sort": null,
-        "createUserId": null,
-        "createTime": null,
-        "updateUserId": null,
-        "updateTime": null,
-      };
-      state.tabList.value = [
-        CategoryEntity.fromJson(selectionOfRecommended),
-        ...data.map((row) => CategoryEntity.fromJson(row)).toList()
-      ];
+      state.tabList.value =
+          data.map((row) => CategoryEntity.fromJson(row)).toList();
       tabController = TabController(
-          initialIndex: 0, length: state.tabList.length, vsync: this);
+          initialIndex: 0, length: state.tabList.length + 1, vsync: this);
     }
   }
 
   queryListBookSetting() async {
     Map<String, dynamic> res = await Http.queryListBookSetting();
     if (res['msg'] == Constant.requestSuccess) {
-      List data = res['data'];
-      state.carouselList.value = data[0];
-      state.recommendedList.value = data[1];
-      state.thisWeekSPushList.value = data[2];
-      state.hotRecommendedList.value = data[3];
-      state.recommendationList.value = data[4];
+      Map<String, dynamic> data = Map<String, dynamic>.from(res['data']!);
+      state.carouselList.value = data['0']
+          .map<SettingBookEntity>((row) => SettingBookEntity.fromJson(row))
+          .toList();
+      state.recommendedList.value = data['1']
+          .map<SettingBookEntity>((row) => SettingBookEntity.fromJson(row))
+          .toList();
+      state.thisWeekSPushList.value = data['2']
+          .map<SettingBookEntity>((row) => SettingBookEntity.fromJson(row))
+          .toList();
+      state.hotRecommendedList.value = data['3']
+          .map<SettingBookEntity>((row) => SettingBookEntity.fromJson(row))
+          .toList();
+      state.recommendationList.value = data['4']
+          .map<SettingBookEntity>((row) => SettingBookEntity.fromJson(row))
+          .toList();
     }
   }
 
