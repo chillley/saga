@@ -70,7 +70,7 @@ class Constant {
   static const Color textColor = Color(0xFF666666);
 
   /// 辅助文字颜色
-  static const Color assistTextColor = Color(0xFFCCCCCC);
+  static const Color assistTextColor = Color(0xFFBFBEBE);
 
   /// 书架 icon
   static const Icon bookRackIcon = Icon(Icons.menu_book);

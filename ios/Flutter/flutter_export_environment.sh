@@ -1,6 +1,6 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=D:\flutter\flutter2.5.1"
+export "FLUTTER_ROOT=D:\flutter\flutter2.5.3"
 export "FLUTTER_APPLICATION_PATH=D:\flutter_master\saga"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_TARGET=lib\main.dart"

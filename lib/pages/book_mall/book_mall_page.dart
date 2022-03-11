@@ -1,7 +1,6 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:saga/constant/constant.dart';
 import 'package:saga/model/setting_book_entity.dart';
@@ -13,7 +12,9 @@ class BookMallPage extends StatelessWidget {
   BookMallPage({Key? key}) : super(key: key);
 
   final controller = Get.find<BookMallController>();
-  final state = Get.find<BookMallController>().state;
+  final state = Get
+      .find<BookMallController>()
+      .state;
 
   _buildAppBar() {
     return AppBar(
@@ -25,17 +26,19 @@ class BookMallPage extends StatelessWidget {
         children: [
           Expanded(
             child: Obx(
-              () => TabBar(
-                isScrollable: true,
-                labelColor: Colors.black,
-                indicatorSize: TabBarIndicatorSize.label,
-                indicatorColor: Constant.themeColor,
-                controller: controller.tabController,
-                tabs: [
-                  const Tab(text: '精选'),
-                  ...state.tabList.map((tab) => Tab(text: tab.name)).toList()
-                ],
-              ),
+                  () =>
+                  TabBar(
+                    isScrollable: true,
+                    labelColor: Colors.black,
+                    indicatorSize: TabBarIndicatorSize.label,
+                    indicatorColor: Constant.themeColor,
+                    controller: controller.tabController,
+                    tabs: [
+                      const Tab(text: '精选'),
+                      ...state.tabList.map((tab) => Tab(text: tab.name))
+                          .toList()
+                    ],
+                  ),
             ),
           ),
           IconButton(
@@ -53,82 +56,83 @@ class BookMallPage extends StatelessWidget {
   _buildRecommend(String name, RxList<SettingBookEntity> list) {
     double gridWidth = (Constant.screenWidth / 3) - 20;
     return Obx(
-      () => ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-        child: Container(
-          padding: edge10,
-          color: Colors.white,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                name,
-                style:
+          () =>
+          ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+            child: Container(
+              padding: edge10,
+              color: Colors.white,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    style:
                     const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-              ),
-              sizedBoxH16,
-              GridView.builder(
-                shrinkWrap: true,
-                itemCount: list.length,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisSpacing: 10,
-                  crossAxisCount: 3,
-                  childAspectRatio: 1 / 1.45,
-                ),
-                itemBuilder: (BuildContext context, int index) {
-                  SettingBookEntity book = list[index];
-                  return InkWell(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          width: gridWidth - 20,
-                          height: (1.35 * (gridWidth - 20)),
-                          child: ClipRRect(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(3.0)),
-                            child: ExtendedImage.network(
-                              imageUrlLoad(book.picUrl.toString()),
-                              cache: true,
-                              width: gridWidth,
-                              height: (2 * gridWidth) - 50,
-                              fit: BoxFit.fill,
-                              loadStateChanged: (ExtendedImageState state) {
-                                if (state.extendedImageLoadState ==
-                                        LoadState.failed ||
-                                    state.extendedImageLoadState ==
-                                        LoadState.loading) {
-                                  return Image.asset("assets/images/no.gif",
-                                      fit: BoxFit.none);
-                                }
-                              },
-                            ),
-                          ),
-                        ),
-                        sizedBoxH12,
-                        SizedBox(
-                          height: 16,
-                          child: Text(
-                            isNullText(book.bookName),
-                            textAlign: TextAlign.start,
-                            style: const TextStyle(
-                                fontSize: 13,
-                                color: Constant.textColor,
-                                fontWeight: FontWeight.w400),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
+                  ),
+                  sizedBoxH16,
+                  GridView.builder(
+                    shrinkWrap: true,
+                    itemCount: list.length,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisSpacing: 10,
+                      crossAxisCount: 3,
+                      childAspectRatio: 1 / 1.45,
                     ),
-                    onTap: () {},
-                  );
-                },
-              )
-            ],
+                    itemBuilder: (BuildContext context, int index) {
+                      SettingBookEntity book = list[index];
+                      return InkWell(
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              width: gridWidth - 20,
+                              height: (1.35 * (gridWidth - 20)),
+                              child: ClipRRect(
+                                borderRadius:
+                                const BorderRadius.all(Radius.circular(3.0)),
+                                child: ExtendedImage.network(
+                                  imageUrlLoad(book.picUrl.toString()),
+                                  cache: true,
+                                  width: gridWidth,
+                                  height: (2 * gridWidth) - 50,
+                                  fit: BoxFit.fill,
+                                  loadStateChanged: (ExtendedImageState state) {
+                                    if (state.extendedImageLoadState ==
+                                        LoadState.failed ||
+                                        state.extendedImageLoadState ==
+                                            LoadState.loading) {
+                                      return Image.asset("assets/images/no.gif",
+                                          fit: BoxFit.none);
+                                    }
+                                  },
+                                ),
+                              ),
+                            ),
+                            sizedBoxH12,
+                            SizedBox(
+                              height: 16,
+                              child: Text(
+                                isNullText(book.bookName),
+                                textAlign: TextAlign.start,
+                                style: const TextStyle(
+                                    fontSize: 13,
+                                    color: Constant.textColor,
+                                    fontWeight: FontWeight.w400),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                        onTap: () {},
+                      );
+                    },
+                  )
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
     );
   }
 
@@ -137,7 +141,7 @@ class BookMallPage extends StatelessWidget {
     return Obx(() {
       SettingBookEntity thisWeekSPushNo1 = state.thisWeekSPushList[0];
       final List<SettingBookEntity> thisWeekSPushOther =
-          state.thisWeekSPushList.sublist(1, state.thisWeekSPushList.length);
+      state.thisWeekSPushList.sublist(1, state.thisWeekSPushList.length);
 
       return ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(10.0)),
@@ -159,7 +163,7 @@ class BookMallPage extends StatelessWidget {
                       height: 140,
                       child: ClipRRect(
                         borderRadius:
-                            const BorderRadius.all(Radius.circular(3.0)),
+                        const BorderRadius.all(Radius.circular(3.0)),
                         child: ExtendedImage.network(
                           imageUrlLoad(thisWeekSPushNo1.picUrl.toString()),
                           cache: true,
@@ -168,7 +172,7 @@ class BookMallPage extends StatelessWidget {
                           fit: BoxFit.fill,
                           loadStateChanged: (ExtendedImageState state) {
                             if (state.extendedImageLoadState ==
-                                    LoadState.failed ||
+                                LoadState.failed ||
                                 state.extendedImageLoadState ==
                                     LoadState.loading) {
                               return Image.asset("assets/images/no.gif",
@@ -183,7 +187,7 @@ class BookMallPage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          sizedBoxH16,
+                          sizedBoxH12,
                           Text(
                             isNullText(thisWeekSPushNo1.bookName),
                             maxLines: 1,
@@ -200,13 +204,14 @@ class BookMallPage extends StatelessWidget {
                                 fontSize: 12, color: Constant.assistTextColor),
                           ),
                           sizedBoxH16,
-                          ExtendedText(
+                          Text(
                             isNullText(thisWeekSPushNo1.bookDesc),
                             style: const TextStyle(
                               fontSize: 14,
+                              fontWeight: FontWeight.w400,
                               color: Constant.assistTextColor,
                             ),
-                            maxLines: 5,
+                            maxLines: 3,
                           ),
                         ],
                       ),
@@ -233,7 +238,7 @@ class BookMallPage extends StatelessWidget {
                           height: (1.35 * (gridWidth - 20)),
                           child: ClipRRect(
                             borderRadius:
-                                const BorderRadius.all(Radius.circular(3.0)),
+                            const BorderRadius.all(Radius.circular(3.0)),
                             child: ExtendedImage.network(
                               imageUrlLoad(book.picUrl.toString()),
                               cache: true,
@@ -242,7 +247,7 @@ class BookMallPage extends StatelessWidget {
                               fit: BoxFit.fill,
                               loadStateChanged: (ExtendedImageState state) {
                                 if (state.extendedImageLoadState ==
-                                        LoadState.failed ||
+                                    LoadState.failed ||
                                     state.extendedImageLoadState ==
                                         LoadState.loading) {
                                   return Image.asset("assets/images/no.gif",
@@ -308,7 +313,7 @@ class BookMallPage extends StatelessWidget {
                           height: 140,
                           child: ClipRRect(
                             borderRadius:
-                                const BorderRadius.all(Radius.circular(3.0)),
+                            const BorderRadius.all(Radius.circular(3.0)),
                             child: ExtendedImage.network(
                               imageUrlLoad(book.picUrl.toString()),
                               cache: true,
@@ -317,7 +322,7 @@ class BookMallPage extends StatelessWidget {
                               fit: BoxFit.fill,
                               loadStateChanged: (ExtendedImageState state) {
                                 if (state.extendedImageLoadState ==
-                                        LoadState.failed ||
+                                    LoadState.failed ||
                                     state.extendedImageLoadState ==
                                         LoadState.loading) {
                                   return Image.asset("assets/images/no.gif",
@@ -332,7 +337,7 @@ class BookMallPage extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              sizedBoxH16,
+                              sizedBoxH6,
                               Text(
                                 isNullText(book.bookName),
                                 maxLines: 1,
@@ -353,10 +358,11 @@ class BookMallPage extends StatelessWidget {
                               ExtendedText(
                                 isNullText(book.bookDesc),
                                 style: const TextStyle(
-                                  fontSize: 14,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w400,
                                   color: Constant.assistTextColor,
                                 ),
-                                maxLines: 5,
+                                maxLines: 3,
                               ),
                             ],
                           ),
