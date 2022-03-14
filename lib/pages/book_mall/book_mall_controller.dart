@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:saga/constant/constant.dart';
 import 'package:saga/model/category_entity.dart';
 import 'package:saga/model/setting_book_entity.dart';
+import 'package:saga/model/type_book_entity.dart';
 import 'package:saga/services/index.dart';
 
 import 'book_mall_state.dart';
@@ -46,12 +47,27 @@ class BookMallController extends GetxController
     }
   }
 
+  searchByPage(CategoryEntity tab) async {
+    Map<String, dynamic> res = await Http.searchByPage(1, 20, tab.id);
+    if (res['msg'] == Constant.requestSuccess) {
+      List data = res['data']['list'];
+      state.typeBookList.value =
+          data.map((row) => TypeBookEntity.fromJson(row)).toList();
+    }
+  }
+
   @override
   void onReady() async {
     // TODO: implement onReady
     super.onReady();
     await queryBookCategory();
     await queryListBookSetting();
+    await searchByPage(state.tabList[1]);
+    tabController.addListener(() {
+      if (tabController.index > 0) {
+        searchByPage(state.tabList[tabController.index]);
+      }
+    });
   }
 
   @override

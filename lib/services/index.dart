@@ -22,4 +22,9 @@ class Http {
   static queryListBookSetting() {
     return HttpUtil.get(Api.queryListBookSetting);
   }
+
+  static searchByPage(curr, limit, catid) {
+    return HttpUtil.get(
+        '${Api.searchByPage}?curr=$curr&limit=$limit&workDirection=0&catId=$catid');
+  }
 }

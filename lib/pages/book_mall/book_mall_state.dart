@@ -1,6 +1,7 @@
 import 'package:saga/model/category_entity.dart';
 import 'package:get/get.dart';
 import 'package:saga/model/setting_book_entity.dart';
+import 'package:saga/model/type_book_entity.dart';
 
 class BookMallState {
   late final RxList<CategoryEntity> tabList = RxList<CategoryEntity>([]);
@@ -14,6 +15,9 @@ class BookMallState {
       RxList<SettingBookEntity>([]);
   late final RxList<SettingBookEntity> carouselList =
       RxList<SettingBookEntity>([]);
+  late final RxList<TypeBookEntity> typeBookList =
+  RxList<TypeBookEntity>([]);
+
 
   BookMallState() {
     tabList.value = [];
@@ -22,5 +26,6 @@ class BookMallState {
     hotRecommendedList.value = [];
     recommendationList.value = [];
     recommendedList.value = [];
+    typeBookList.value = [];
   }
 }
